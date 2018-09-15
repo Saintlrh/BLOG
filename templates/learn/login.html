@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Saint的个人网站，采用的 Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于 Python 与前端开发，包括 Python、Django、HTML、CSS、JavaScript、Redis、Linux 等。">
+    <title>{{ title }}</title>
+    <link href="/static/myapp/css/login.css" rel="stylesheet"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/myapp/other/icon.ico"/>
+</head>
+<body>
+    <div class="box">
+        <div class="container">
+            <div class="flag">
+                <p1>{{ flag }}</p1>
+            </div>
+            <div class="login_content">
+                <div class="form-header">
+                    <div class="header-title">
+                        <h4>sign in</h4>
+                    </div>
+                </div>
+
+                <form action="/login/" method="post">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        {{ form.username }}
+                        <br/>
+                        {% if error.username.0 %}
+                        <span>{{ error.username.0 }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="input-group">
+                        {{ form.passwd }}
+                        <br/>
+                        {% if error.passwd.0 %}
+                        <span>{{ error.passwd.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <input type="submit" class="submit1" value="Sign In"/>
+                    <a id="submit2" href="/register/" target="_blank">Sign Up</a>
+                </form>
+            </div>
+        </div>
+        <footer>
+                &copySaint.All Rights Reserved
+        </footer>
+    </div>
+</body>
+</html>

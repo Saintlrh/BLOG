@@ -1,0 +1,130 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+    background: url("../img/registerback.png") repeat center center;
+}
+
+
+.box{
+    height: 100%;
+    margin: 0 auto;
+    width: 1200px;
+}
+.flag{
+    margin: 0 auto 20px;
+    width: 360px;
+    text-align: center;
+}
+.flag p1{
+    font-size: 17px;
+    font-family: "Open Sans", Arial, sans-serif;
+    height: 20px;
+    line-height: 20px;
+    color: #848484;
+}
+
+.container{
+    position: fixed;
+    /*top: 80%;*/
+    left: 50%;
+    top: 10%;
+    margin-left: -180px;
+    width: 360px;
+    /*margin: 100px auto 0;*/
+}
+
+
+.register_content{
+    opacity: 0.8;
+    margin: 0 auto ;
+    padding: 10px 30px;
+    background-color: #faffff;
+    /*height: 300px;*/
+    box-shadow: 0 0 46px 2px rgba(101, 101, 101, 0.37);
+}
+.form-header{
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.header-title{
+    float: left;
+}
+.header-title h4{
+    text-transform: uppercase;
+    color: #000000;
+    margin-right: 20px;
+    letter-spacing: 2px;
+    font-size: 22px;
+    font-family: "Open Sans", Arial, sans-serif;
+    font-weight: 100;
+}
+
+form{
+    margin:30px 0 ;
+}
+.input-group{
+    margin-bottom: 30px;
+    outline: none;
+    height: 35px;
+    border: 0;
+    border-bottom: 1px solid rgba(48, 49, 49, 0.1);
+    background-color: transparent;
+}
+
+
+.btn {
+    margin-left: 95px;
+    cursor: pointer;
+    color: #faffff;
+    width: 110px;
+    height: 45px;
+    border: none;
+    background-color: #33cccc;
+    box-shadow: -2px 10px 20px -1px rgba(51, 204, 204, 0.4);
+    font-family: "Open Sans", Arial, sans-serif;
+}
+
+.btn:hover{
+    background-color: #34dede;
+}
+
+footer{
+    width: 300px;
+    left: 50%;
+    top: 97%;
+    margin-left: -165px;
+    position: fixed;
+    /*margin: 50px auto 0  ;*/
+    /*margin-top: 10%;*/
+    /*height: 5%;*/
+    text-align: center;
+    font-size: 10px;
+    font-weight: lighter;
+    color: #939697;
+    /*height: 20px;*/
+    line-height: 20px;
+}
+
+
+.c{
+    font-size: 15px;
+    line-height: 30px;
+    background-color: #faffff;
+    height: 30px;
+    outline: none;
+    border: 0;
+}
+
+@media screen and (max-width: 450px) {
+	.box {
+		width:100%;
+	}
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Home</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Saint的个人网站，采用的 Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于 Python 与前端开发，包括 Python、Django、HTML、CSS、JavaScript、Redis、Linux 等。">
+		<!--[if lte IE 8]><script src="/static/myapp/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/static/myapp/css/main.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="/static/myapp/other/icon.ico"/>
+		<!--[if lte IE 8]><link rel="stylesheet" href="/static/myapp/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="/static/myapp/css/ie9.css" /><![endif]-->
+        <style>
+            @-webkit-keyframes hue {
+                from {
+                -webkit-filter: hue-rotate(0deg);
+                }
+                to {
+                -webkit-filter: hue-rotate(-360deg);
+                }
+                }
+
+            .header-content{
+                background-image: -webkit-linear-gradient(92deg, #00c7dd,#efff00);
+                -webkit-animation: hue 10s infinite linear;
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+            }
+        </style>
+	</head>
+	<body class="index">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1 id="logo"><a href="/home/">SAINT  <span> Site</span></a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="current">{{ username }}</li>
+							<li class="submenu">
+								<a href="/home/">Home</a>
+								<ul>
+									<li><a href="/blog/">Blog</a></li>
+									<li><a href="/share/">Share</a></li>
+									<li class="submenu"><a href="/contact/">Contact</a></li>
+								</ul>
+							</li>
+							<li><a href="{{ href }}" class="button special">{{ status }}</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+
+					<div class="inner">
+
+						<header>
+							<h2 class="header-content">SAINT</h2>
+						</header>
+						<p><!--[-->This is<!--]--> <strong><!--[-->MY BLOG<!--]--></strong>, <!--[-->a brand<!--]-->
+						<br />
+						<!--[-->new world<!--]-->
+						<br />
+						<!--[-->for YOU GUYS.<!--]--></p>
+						<footer>
+							<ul class="buttons vertical">
+								<li><a href="#main" class="button fit scrolly"><!--[-->Explore More<!--]--></a></li>
+							</ul>
+						</footer>
+
+					</div>
+
+				</section>
+
+			<!-- Main -->
+				<article id="main">
+
+					<header class="special container">
+						<span class="icon fa-bar-chart-o"></span>
+						<h2><!--[-->As this is my<!--]--> <strong><!--[-->first<!--]--></strong> <!--[-->try to build a site<!--]-->
+						<br />
+						<!--[-->I decide to give a detailed introductions to you.<!--]--></h2>
+						<p><!--[-->The front end of this website is a <strong>Bootstrap</strong> template,<!--]-->
+						<br />
+						<!--[-->and the background is built by Python's web framework <strong>Django </strong><!--]-->
+						<!--[-->, it looks not bad ☺<!--]-->
+						<br />
+					</header>
+
+					<!-- One -->
+						<section class="wrapper style2 container special-alt">
+							<div class="row 50%">
+								<div class="8u 12u(narrower)">
+
+									<header>
+										<h2><!--[-->About <!--]--> <strong><!--[-->myself<!--]--></strong> </h2>
+									</header>
+									<p>Strictly speaking, I'm not a professional programmer, I'm just interested in coding, so as long as I'm free, I'll code to enrich myself. Here are my mainly used or focused programming languages, techniques or tools to do my projects.</p>
+                                    <br>
+                                    <p>You can find some of my personal open-source projects from my GITHUB</p>
+                                    <footer>
+										<ul class="buttons">
+											<li><a href="https://github.com/Saintlrh" class="button">GITHUB</a></li>
+										</ul>
+									</footer>
+
+								</div>
+								<div class="4u 12u(narrower) important(narrower)">
+                                    <img src="/static/myapp/img/tools.png" height="230px" width="330px" alt="picture">
+								</div>
+							</div>
+						</section>
+
+				</article>
+
+
+			<!-- Footer -->
+				<footer id="footer">
+
+					 <div class="wechat_box" id="wechat_box" style="display: none; margin: 0 auto">
+                        <img src="/static/myapp/img/wechat.jpg" width="80px" alt="二维码">
+                    </div>
+					<ul class="icons">
+						<li><a href="http://wpa.qq.com/msgrd?v=3&uin=1102533916" class="icon circle fa-qq"><span class="label">QQ</span></a></li>
+						<li><a id="wechat_click" class="icon circle fa-weixin"><span class="label">Weixin</span></a></li>
+						<li><a href="/contact/" class="icon circle fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="/static/myapp/js/jquery.min.js"></script>
+			<script src="/static/myapp/js/jquery.dropotron.min.js"></script>
+			<script src="/static/myapp/js/jquery.scrolly.min.js"></script>
+			<script src="/static/myapp/js/jquery.scrollgress.min.js"></script>
+			<script src="/static/myapp/js/skel.min.js"></script>
+			<script src="/static/myapp/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/static/myapp/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/static/myapp/js/main.js"></script>
+            <script>
+                var btn = document.getElementById("wechat_click")
+                var wechat = document.getElementById("wechat_box")
+                btn.onclick=(function () {
+                    wechat.style.display="block";
+                    var time5= setTimeout(function () {
+                         wechat.style.display="none";
+                    },10000)
+                })
+            </script>
+	</body>
+</html>

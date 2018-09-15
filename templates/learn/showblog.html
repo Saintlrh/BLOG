@@ -1,0 +1,588 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Blog</title>
+		<meta charset="utf-8" />
+        <meta name="description" content="Saint的个人网站，采用的 Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于 Python 与前端开发，包括 Python、Django、HTML、CSS、JavaScript、Redis、Linux 等。">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="/static/myapp/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/static/myapp/css/main.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="/static/myapp/other/icon.ico"/>
+		<!--[if lte IE 8]><link rel="stylesheet" href="/static/myapp/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="/static/myapp/css/ie9.css" /><![endif]-->
+        <style>
+            #main{
+                padding-top: 7em;
+            }
+            .blog-box .blog-date{
+                color: #de6b02;
+                font-family: "Open Sans", Arial, sans-serif;
+            }
+            .blog-box h3{
+                margin: 10px 0 0;
+                line-height: 40px;
+                font-size: 25px;
+                color: #154153;
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+            .content .blog-box .blog-title a :hover{
+                color: #ff8f21;
+            }
+            .content .blog-box .blog-sep {
+                width: 200px;
+                margin-top: 40px;
+                font-size: 1px;
+                line-height: 0;
+                height: 2px;
+                background-color: #dddddd;
+            }
+            .content .blog-box .blog-extra a{
+                font-size: 18px;
+                color: #154153;
+                text-decoration: none;;
+            }
+            .content .blog-box .blog-extra a:hover{
+                color: #ff8f21;
+            }
+            .content .blog-box p{
+                margin: 10px 0;
+                line-height: 25px;
+                color: #555454;
+                font-size: 14px;
+            }
+            .content .blog-box{
+                padding-top: 30px;
+            }
+
+            .pagination {
+                display: inline-block;
+                padding-left: 0;
+                margin:  0;
+                border-radius: 4px;
+            }
+
+            .pagination li{
+                display: inline;
+            }
+
+            .pagination .active a{
+                z-index: 2;
+                color: #ddd;
+                cursor: default;
+                background-color: #337ab7;
+                border-color: #337ab7;
+            }
+            .pagination li a{
+                position: relative;
+                float: left;
+                padding: 10px 15px;
+                line-height: 1.4;
+                text-decoration: none;
+                border: 1px solid #ddd;
+                color: #005059;
+
+            }
+
+            .pagination li a:hover{
+                z-index:3;
+                background-color: #eee;
+                border-color: #ddd;
+                color: #de6b02;
+            }
+            /*幅栏展示*/
+            .sidebar .info h3{
+                {#line-height: 20px;#}
+                height: 20px;
+                font-size: 1.4em;
+                font-weight: bold;
+                text-align: center;
+                font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+                color: #ff8100;
+            }
+            .sidebar .first .img{
+                text-align: center;
+            }
+            .sidebar .first img {
+
+                height: 120px;
+                width: 120px;
+                {#margin: 10px auto;#}
+                border-radius: 50%;
+            }
+            .sidebar .profile{
+                margin-top: 30px;
+            }
+            .sidebar .profile h4{
+                line-height: 20px;
+                height: 20px;
+                font-size: 1.4em;
+                font-weight: bold;
+                text-align: center;
+                font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+                color: #00a1ff;
+            }
+            .sidebar .profile p{
+                text-align: center;
+                font-size: 18px;
+                color: #18909c;
+            }
+            .sidebar .second{
+                margin: 30px auto;
+            }
+            .sidebar .second .search{
+                overflow: hidden;
+                margin-top: 20px;
+            }
+            .sidebar .second .search-img{
+                float: left;
+                height: 30px;
+                width: 30px;
+            }
+            .sidebar .second .search-content{
+                float: left;
+                margin-left: 10px;
+                border-bottom: 2px solid #dddddd;
+            }
+            .sidebar .second .search-content input{
+                border: none;
+                outline: none;
+                width: 260px;
+                height: 25px;
+            }
+            .sidebar .second h3{
+                line-height: 20px;
+                height: 20px;
+                font-size: 1.4em;
+                font-weight: bold;
+                text-align: center;
+                font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+                color: #ff8100;
+            }
+            .sidebar .third h3{
+                line-height: 20px;
+                height: 20px;
+                font-size: 1.4em;
+                font-weight: bold;
+                text-align: center;
+                font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+                color: #ff8100;
+            }
+            .sidebar .third{
+                margin: 0 auto;
+                {#height: 400px;#}
+                width: 300px;
+                {#margin: 60px auto;#}
+            }
+            .sidebar .third-left{
+                float: left;
+            }
+            .sidebar .third-right{
+                float: right;
+            }
+            .sidebar .third .third-contain{
+                border-bottom: 2px solid #dddddd;
+                overflow: hidden;
+            }
+            .sidebar .third ul{
+                margin: 5px 0;
+                list-style: none;
+                padding-left: 0;
+            }
+            .sidebar .third ul li{
+                display: inline-block;
+                {#margin: 15px 0;#}
+            }
+            .sidebar a{
+                text-decoration: none;
+                color: #154153;
+                font-size: 17px;
+            }
+            .sidebar a:hover{
+                color: #de6b02;
+            }
+
+
+            /*评论部分制作*/
+
+            .blog-box .blog-comment{
+                margin-top: 30px;
+            }
+            .blog-box .blog-comment .title span{
+                font-family: inherit;
+                color: #1b1b1b;
+                font-size: 25px;
+                line-height: 50px;
+            }
+            .blog-box .blog-comment .item-info{
+                display: inline-block;
+            }
+            .blog-box .blog-sep{
+                width: 200px;
+                margin-top: 40px;
+                font-size: 1px;
+                line-height: 0;
+                height: 2px;
+                background-color: #dddddd;
+            }
+            .blog-box .comment-details .items-date{
+                color: #e67c00;
+                float: left;
+                font-size: 15px;
+                font-family: "Open Sans", Arial, sans-serif;
+            }
+            .blog-box .comment-details .items-author{
+                color: #2e6da4;
+                margin-left: 15px;
+                float: left;
+                font-family: "Open Sans", Arial, sans-serif;
+                font-size: 15px;
+            }
+            .blog-box .blog-comment .item-content p{
+                margin: 0;
+                color: #1c1c1c;
+                font-size: 14px;
+            }
+            .blog-box .blog-make-comment{
+                margin-top: 40px;
+            }
+            .blog-box .blog-comment .title span{
+                font-weight: normal;
+            }
+            .blog-box .blog-make-comment textarea{
+                height: 40px;
+                border: none;
+                padding: 0;
+                float: left;
+                margin-left: 15px;
+                font-family: "Open Sans", Arial, sans-serif;
+                outline: none;
+                font-size: 20px;
+                max-width: 66%;
+                min-width: 66%;
+                border-bottom: #dddddd 2px solid;
+            }
+            .blog-box .blog-comment-pencil{
+                float: left;
+            }
+            .blog-box .blog-make-comment .clear{
+                clear: both;
+            }
+
+           .blog-box .blog-make-comment .post-comment {
+                margin-top: 10px;
+                height: 35px;
+            }
+            .blog-box .wrong-info{
+                color:white;
+                float: left;
+                margin: 5px 0 0 ;
+                display: none;
+                height: 28px;
+                line-height: 28px;
+                font-size: 14px;
+                border: 1px solid #ff8300;
+                background: #f89100;
+            }
+             .blog-box .blog-make-comment .post-comment input{
+                    min-width: 40px;
+                    border: none;
+                    position: absolute;
+                    float: left;
+                    margin-left: 35%;
+                    height: 35px;
+            }
+            .blog-box .blog-make-comment .post-comment input.button {
+                        -webkit-animation-duration: 2s;
+                        -webkit-animation-iteration-count: infinite;
+                    }
+             .blog-box .blog-make-comment .post-comment .magenta.button:hover{
+                background-color: #34cbcb;
+            }
+            .blog-box .blog-make-comment .post-comment .magenta.button{
+                background-color: #4ca6a6;
+                 -webkit-animation-name: magentaPulse; -webkit-animation-duration: 2s;
+            }
+             .blog-box .blog-make-comment .post-comment .button{
+                color: #fff!important;
+                font-size: 13px;
+                font-weight: 700;
+                line-height: 1;
+                text-decoration: none;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-box-shadow: 0 1px 3px rgba(0,0,0,.25);
+                -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.25);
+                text-shadow: 0 -1px 1px rgba(0,0,0,.25);
+                border-bottom: 1px solid rgba(0,0,0,.25);
+                position: relative;
+                cursor: pointer;
+                overflow: visible;
+                width: auto;
+            }
+            @-webkit-keyframes magentaPulse {
+                      from { background-color: #34cbcb; -webkit-box-shadow: 0 0 9px #333; }
+                      50% { background-color: #34dede; -webkit-box-shadow: 0 0 18px #34dede; }
+                      to { background-color: #34cbcb; -webkit-box-shadow: 0 0 9px #333; }
+                    }
+
+             .blog-box .blog-make-comment .post-comment .large{
+                font-size: 14px;
+                padding: 8px 19px 9px;
+            }
+        </style>
+
+	</head>
+	<body class="right-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="/home/">SAINT <span> Site </span></a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="current"><a href="/home/">{{ username }}</a></li>
+							<li class="submenu">
+								<a href="/blog/">Blog</a>
+								<ul>
+									<li><a href="/home/">Home</a></li>
+									<li><a href="/share/">Share</a></li>
+									<li class="submenu"><a href="/contact/">Contact</a></li>
+								</ul>
+							</li>
+							<li><a href="{{ href }}" class="button special">{{ status }}</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<article id="main">
+
+					<header class="special container">
+						<span class="icon fa-laptop"></span>
+						<h2><!--[-->Welcome to<!--]--> <strong><!--[-->BLOG<!--]--></strong></h2>
+						<p><!--[-->Whatever is worth doing is worth doing well.<!--]--></p>
+					</header>
+
+					<!-- One -->
+						<section class="wrapper style4 container">
+
+							<div class="row 150%">
+								<div class="8u 12u(narrower)">
+
+									<!-- Content -->
+										<div class="blog-box">
+                                            <div class="blog-date"><span>{{ details.date }}</span><span> / {{ details.classify}}</span></div>
+                                            <div class="blog-title"><h3>{{ details.title }}</h3></div>
+                                            <div class="blog-content"><p>{{ details.content|safe }}</p></div>
+                                            <div class="blog-sep"></div>
+                                            <div class="blog-comment">
+                                                <div class="title">
+                                                    <span id = "tag-comment">Comment</span>
+                                                </div>
+                                                <div class="comment-details">
+                                                    {% for i in comment_list %}
+                                                        <div class="comment-items">
+                                                            <div class="item-info">
+                                                                <div class="items-date">
+                                                                    <span>{{ i.date }} </span>
+                                                                </div>
+                                                                <div class="items-author">
+                                                                    <span>From {{ i.user_id }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="item-content">
+                                                                <p>{{ i.comment }}</p>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="blog-sep"></div>
+                                            <p id="wrong-tip" class="wrong-info"></p>
+                                            <div class="blog-make-comment">
+                                                <div class="blog-comment-pencil">
+                                                    <img src="/static/myapp/img/pencil.png" width="35px">
+                                                </div>
+                                                <textarea name="comment" id="content" cols="30" rows="1" placeholder="Commentary must be less than 100 words ☺"></textarea>
+                                                <div class="clear" ></div>
+                                                <div class="post-comment">
+                                                    <input type="button" id = "comment" class="button large magenta" value={{tips}}>
+                                                </div>
+                                            </div>
+                                        </div>
+
+								</div>
+								<div class="4u 12u(narrower)">
+
+									<!-- Sidebar -->
+										<div class="sidebar">
+                                            <div class="first">
+                                                <div class="info">
+                                                    <h3>ABOUT</h3>
+                                                </div>
+                                                <div class="img">
+                                                    <img src="/static/myapp/img/blogintro.jpg" />
+                                                </div>
+                                                <div class="profile">
+                                                    <h4>Saint</h4>
+                                                    <p>I'm saint, and let me give you a warm welcome to visit my blog site.
+                                                        I hope you'll enjoy it. Also, you can visit my <a href="/blog/">BLOG PAGE</a> to learn more about me.</p>
+                                                </div>
+                                            </div>
+                                            <div class="second">
+                                                <h3>SEARCH</h3>
+                                                <div class="search">
+                                                    <div class="search-img">
+                                                        <img src="/static/myapp/img/search-button.png" width="30"/>
+                                                    </div>
+                                                    <div class="search-content">
+                                                        <form action="/blog/search/" method="get">
+                                                            <input name="q" type="text" placeholder="Find What You Want...">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="third">
+                                                <h3>CATEGORIES</h3>
+                                                {% for i in classifies %}
+                                                    <a href="/blog/cat={{ i.id }}/">
+                                                    <div class="third-contain">
+                                                        <div class="third-left">
+                                                            <ul>
+                                                                <li>{{ i.name }}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="third-right">
+                                                            <ul>
+                                                                <li>({{ i.num }})</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    </a>
+                                                {% endfor %}
+                                            </div>
+{#											<section>#}
+{#												<header>#}
+{#													<h3>Magna Feugiat</h3>#}
+{#												</header>#}
+{#												<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>#}
+{#												<footer>#}
+{#													<ul class="buttons">#}
+{#														<li><a href="#" class="button small">Learn More</a></li>#}
+{#													</ul>#}
+{#												</footer>#}
+{#											</section>#}
+{##}
+{#											<section>#}
+{#												<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>#}
+{#												<header>#}
+{#													<h3>Amet Lorem Tempus</h3>#}
+{#												</header>#}
+{#												<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>#}
+{#												<footer>#}
+{#													<ul class="buttons">#}
+{#														<li><a href="#" class="button small">Learn More</a></li>#}
+{#													</ul>#}
+{#												</footer>#}
+{#											</section>#}
+										</div>
+
+								</div>
+							</div>
+						</section>
+
+				</article>
+
+			<!-- Footer -->
+				<footer id="footer">
+
+                    <div class="wechat_box" id="wechat_box" style="display: none; margin: 0 auto">
+                        <img src="/static/myapp/img/wechat.jpg" width="80px" alt="二维码">
+                    </div>
+					<ul class="icons">
+						<li><a href="http://wpa.qq.com/msgrd?v=3&uin=1102533916" class="icon circle fa-qq"><span class="label">QQ</span></a></li>
+						<li><a id="wechat_click" class="icon circle fa-weixin"><span class="label">Weixin</span></a></li>
+						<li><a href="/contact/" class="icon circle fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+
+			<script src="/static/myapp/js/jquery.min.js"></script>
+			<script src="/static/myapp/js/jquery.dropotron.min.js"></script>
+			<script src="/static/myapp/js/jquery.scrolly.min.js"></script>
+			<script src="/static/myapp/js/jquery.scrollgress.min.js"></script>
+			<script src="/static/myapp/js/skel.min.js"></script>
+			<script src="/static/myapp/js/util.js"></script>
+			<!--[if lte IE 8]><script src="myapp/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/static/myapp/js/main.js"></script>
+            <script src="/static/myapp/js/jquery.min.js"></script>
+            <script>
+                /*处理评论ajax*/
+                $(document).ready(function () {
+                    $.ajaxSetup({
+                           data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
+                      });
+
+                    $("#comment").click(function () {
+                        var comment = $("#content").val();
+
+                        $.ajax({
+                            type: "post",
+                            async: true,
+                            url: "/blog={{ details.id }}/",
+                            data:{"comment":comment},
+                            success:function () {
+
+                                if($("#comment").val() == "Login"){
+                                     window.location.href="/login/"
+                                }
+                                else if($("#comment").val() == "Send" && comment.replace(/(^s*)|(s*$)/g, "").length ==0){
+                                    $("#wrong-tip").html("输入不能为空");
+                                    $("#wrong-tip").css("display","block");
+                                    var timer = setTimeout(function(){
+                                    $("#wrong-tip").css("display","none");
+                                    },1500);
+                                }
+                                else{
+                                    $("#wrong-tip").html("正在发送评论");
+                                    $("#wrong-tip").css("display","block");
+                                    var time=setTimeout(function(){
+                                    location.reload(true);
+                                    },500);
+                                    $('html,body').animate({scrollTop:$('#tag-comment').offset().top-150},"fast");
+                                }
+                            },
+                            error:function () {
+                                alert("em.....好像出现了问题")
+                            }
+                        })
+                    })
+                })
+            </script>
+            <script>
+                var img =document.getElementsByTagName("img");
+                console.log(img)
+                window.onresize=
+                window.onload=(function () {
+                for (var i = 0; i<(img.length-4);i++) {
+                    img[i].style.width ="100%";
+                    img[i].style.height ="100%";
+                     }
+                     });
+                var btn = document.getElementById("wechat_click")
+                var wechat = document.getElementById("wechat_box")
+                btn.onclick=(function () {
+                    wechat.style.display="block";
+                    var time5= setTimeout(function () {
+                         wechat.style.display="none";
+                    },10000)
+                })
+            </script>
+	</body>
+</html>

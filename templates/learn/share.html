@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Share</title>
+		<meta charset="utf-8" />
+        <meta name="description" content="Saint的个人网站，采用的 Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于 Python 与前端开发，包括 Python、Django、HTML、CSS、JavaScript、Redis、Linux 等。">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="/static/myapp/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/static/myapp/css/main.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="/static/myapp/other/icon.ico"/>
+		<!--[if lte IE 8]><link rel="stylesheet" href="/static/myapp/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="/static/myapp/css/ie9.css" /><![endif]-->
+        <style>
+            @-webkit-keyframes hue {
+                from {
+                -webkit-filter: hue-rotate(0deg);
+                }
+                to {
+                -webkit-filter: hue-rotate(-360deg);
+                }
+                }
+
+            .header-content{
+                background-image: -webkit-linear-gradient(92deg, #00c7dd,#efff00);
+                -webkit-animation: hue 5s infinite linear;
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+            }
+            .share-title{
+                font-family: "Open Sans", Arial, sans-serif;
+                font-size: 0.9em;
+                color: #ff9200;
+            }
+        </style>
+	</head>
+	<body class="no-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="/home/">SAINT <span>Site</span></a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="current">{{ username }}</li>
+							<li class="submenu">
+								<a href="/share/">Share</a>
+								<ul>
+									<li><a href="/contact/">Contact</a></li>
+									<li><a href="/home/">Home</a></li>
+									<li class="submenu"><a href="/blog/">Blog</a></li>
+								</ul>
+							</li>
+							<li><a href="{{ href }}" class="button special">{{ status }}</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<article id="main">
+
+					<header class="special container " >
+						<span class="icon fa-laptop"></span>
+						<h2 class="header-content"><!--[--><!--]--> <strong><!--[-->Welcome to SHARE<!--]--></strong></h2>
+						<p class="header-content"><!--[-->这世上本就有很多无奈，就像再快的<strong><!--[-->AE86<!--]--></strong>，也追不回爱坐奔驰的女人...<!--]--></p>
+					</header>
+
+					<!-- One -->
+						<section class="wrapper style4 container">
+
+							<!-- Content -->
+                             <div class="content">
+									<section>
+										<header>
+											<h3 class="share-title">Now | 2018年9月15日16:06</h3>
+										</header>
+                                        <p><iframe class="box-iframe" src="/autoplay/" scrolling="no" frameborder="0"  style="width: 100%; height: auto"></iframe></p>
+									</section>
+                             </div>
+
+                            {% for i in share %}
+                                <div class="content">
+									<section>
+										<header>
+											<h3 class="share-title">{{ i.title }} | {{ i.date }}</h3>
+										</header>
+                                        <p>{{ i.content|safe }}</p>
+									</section>
+								</div>
+                            {% endfor %}
+
+
+						</section>
+
+				</article>
+
+			<!-- Footer -->
+				<footer id="footer">
+                    <div class="wechat_box" id="wechat_box" style="display: none; margin: 0 auto">
+                        <img src="/static/myapp/img/wechat.jpg" width="80px" alt="二维码">
+                    </div>
+					<ul class="icons">
+						<li><a href="http://wpa.qq.com/msgrd?v=3&uin=1102533916" class="icon circle fa-qq"><span class="label">QQ</span></a></li>
+						<li><a id="wechat_click" class="icon circle fa-weixin"><span class="label">Weixin</span></a></li>
+						<li><a href="/contact/" class="icon circle fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+
+				    <ul class="copyright">
+						<li>&copy; Saint</li><li>Powered By Django</li>
+					</ul>
+
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="/static/myapp/js/jquery.min.js"></script>
+			<script src="/static/myapp/js/jquery.dropotron.min.js"></script>
+			<script src="/static/myapp/js/jquery.scrolly.min.js"></script>
+			<script src="/static/myapp/js/jquery.scrollgress.min.js"></script>
+			<script src="/static/myapp/js/skel.min.js"></script>
+			<script src="/static/myapp/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/static/myapp/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/static/myapp/js/main.js"></script>
+            <script>
+                var img =document.getElementsByTagName("img");
+                var frame = document.getElementsByTagName("iframe");
+                {#console.log(frame.style.height);#}
+                window.onresize=
+                window.onload=(function () {
+                for (var i = 0; i<(img.length-1);i++) {
+                    img[i].style.width ="100%";
+                    img[i].style.height ="100%";
+                     }
+                for (var i = 0; i<frame.length;i++) {
+                    console.log(frame[i].clientWidth);
+                    frame[i].style.height=frame[i].clientWidth/1.9+"px";
+                     }
+
+                     });
+
+                var btn = document.getElementById("wechat_click")
+                var wechat = document.getElementById("wechat_box")
+                btn.onclick=(function () {
+                    wechat.style.display="block";
+                    var time5= setTimeout(function () {
+                         wechat.style.display="none";
+                    },10000)
+                })
+            </script>
+	</body>
+</html>
